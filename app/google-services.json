@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "912357219581",
+    "firebase_url": "https://meet-n-dev.firebaseio.com",
+    "project_id": "meet-n-dev",
+    "storage_bucket": "meet-n-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912357219581:android:fe6590f5a93e3ebc603294",
+        "android_client_info": {
+          "package_name": "com.octopro.meetndev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912357219581-cmjv4ejtbt489a1cucgmqr1saj2vrqpd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.octopro.meetndev",
+            "certificate_hash": "ce087990542c0964a85d7fb68c9f45b507e2bd9b"
+          }
+        },
+        {
+          "client_id": "912357219581-5gf0ajiulh5fhe98qa3li0jo5iugji3b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuBdxkvY0Fia1ZXr6IHH7H9JeLNKiDVkk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912357219581-5gf0ajiulh5fhe98qa3li0jo5iugji3b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
