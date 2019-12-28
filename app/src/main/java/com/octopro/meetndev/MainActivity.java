@@ -20,6 +20,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private Cards cards_data[];
     private arrayAdapter arrayAdapter;
     private Constants constants;
-    private Button logoutBtn;
+    private Button logoutBtn, settingsBtn;
     private String userGender;
     private String otherUserGender;
 
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         constants.auth = FirebaseAuth.getInstance();
         currentUserId = constants.auth.getUid();
         logoutBtn = (Button) findViewById(R.id.logoutBtn);
+        settingsBtn = (Button) findViewById(R.id.settingsBtn);
 
         rowItems = new ArrayList<Cards>();
 
@@ -91,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
                 String userId = obj.getUserId();
 
                 userDb.child(otherUserGender).child(userId).child("connections").child("yep").child(currentUserId).setValue(true);
+                didConnectionMatched(userId);
                 Toast.makeText(MainActivity.this, "Right!", Toast.LENGTH_SHORT).show();
             }
 
@@ -118,6 +121,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Logout(view);
+            }
+        });
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Settings(view);
+            }
+        });
+    }
+
+    private void didConnectionMatched(final String userId){
+        DatabaseReference currentUserConnectionDb = userDb.child(userGender).child(currentUserId).child("connections").child("yep").child(userId);
+        currentUserConnectionDb.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    Toast.makeText(MainActivity.this, "new Connection", Toast.LENGTH_LONG).show();
+                    userDb.child(otherUserGender).child(dataSnapshot.getKey()).child("connections").child("matches").child(currentUserId).setValue(true);
+                    userDb.child(userGender).child(currentUserId).child("connections").child("matches").child(dataSnapshot.getKey()).setValue(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
     }
@@ -231,6 +259,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(MainActivity.this, LoginRegisterPrompter.class);
         startActivity(intent);
         finish();
+        return;
+    }
+
+    private void Settings(View view){
+        Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+        intent.putExtra("userGender", userGender);
+        startActivity(intent);
         return;
     }
 }

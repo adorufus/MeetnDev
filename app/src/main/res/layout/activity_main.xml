@@ -7,15 +7,27 @@
     tools:context=".MainActivity">
 
     <Button
-        android:id="@+id/logoutBtn"
+    android:id="@+id/logoutBtn"
+    android:layout_width="wrap_content"
+
+    android:layout_height="wrap_content"
+    android:layout_marginTop="16dp"
+    android:text="Logout"
+    app:layout_constraintEnd_toStartOf="@id/settingsBtn"
+    app:layout_constraintHorizontal_bias="0.049"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/settingsBtn"
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Logout"
+        android:text="Settings"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/logoutBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.lorentzos.flingswipe.SwipeFlingAdapterView

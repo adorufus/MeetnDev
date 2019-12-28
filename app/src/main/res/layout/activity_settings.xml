@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity"
+    android:orientation="vertical"
+    android:padding="20sp">
+
+    <ImageView
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:id="@+id/profileImage"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginBottom="20sp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameEditText"
+        android:background="@null"
+        android:hint="Name"
+        android:textSize="20sp"
+        android:layout_marginBottom="20sp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/emailEditText"
+        android:background="@null"
+        android:hint="Email"
+        android:textSize="20sp"
+        android:inputType="textEmailAddress"
+        android:layout_marginBottom="20sp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/phoneEditText"
+        android:background="@null"
+        android:hint="Phone"
+        android:textSize="20sp"
+        android:inputType="phone"
+        android:layout_marginBottom="20sp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SAVE"
+        android:id="@+id/saveBtn"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:background="@drawable/rounded_button"
+        android:layout_marginBottom="15sp"
+        android:backgroundTint="@android:color/holo_green_light"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BACK"
+        android:id="@+id/backBtn"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="#BF575757"/>
+
+</LinearLayout>
