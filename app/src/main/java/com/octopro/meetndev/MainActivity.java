@@ -3,16 +3,20 @@ package com.octopro.meetndev;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -32,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private arrayAdapter arrayAdapter;
     private Constants constants;
     private Button logoutBtn, settingsBtn;
+    private BottomNavigationView bottomNavigationView;
+
     private String userGender;
     private String otherUserGender;
 
@@ -49,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 
         checkUserGender();
 
-
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
         userDb = FirebaseDatabase.getInstance().getReference().child("Users");
         constants = new Constants();
         constants.auth = FirebaseAuth.getInstance();
@@ -127,6 +133,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Settings(view);
+            }
+        });
+    }
+
+    private void setupClickEventForNavbar(){
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment = null;
+                switch (item.getItemId()){
+                    case R.id.homeNavigation:
+                        selectedFragment = HomeFragment.newInstance();
+                        break;
+                }
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().replace(R.id.content, selectedFragment);
+                transaction.commit();
+                return true;
             }
         });
     }
@@ -226,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 if(dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUserId) && !dataSnapshot.child("connections").child("yep").hasChild(currentUserId)){
-                    Cards item = new Cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString());
+                    Cards item = new Cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString(), dataSnapshot.child("profileImageUrl").getValue().toString(), dataSnapshot.child("skills").getValue().toString());
                     rowItems.add(item);
                     arrayAdapter.notifyDataSetChanged();
                 }
